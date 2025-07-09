@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clicktastic</title>
+  <meta name="description" content="Ethical advertising for the digital age.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preload" href="fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="styles/global.css">
+  <style>
+    header {
+      margin: 0;
+      padding: 0 1em;
+      background: white;
+      box-shadow: 0 2px 8px rgba(15, 18, 25, 0.05);
+    }
+    h2 { margin: 0; font-size: 1em; }
+    h2 a { text-decoration: none; }
+    nav { display: flex; align-items: center; justify-content: space-between; }
+    nav a { padding: 1em 0.5em; color: rgb(15, 18, 25); border-bottom: 4px solid transparent; text-decoration: none; }
+    nav a.active { border-bottom-color: #ff006e; }
+    footer { padding: 2em 1em 6em; background: linear-gradient(rgba(229,233,240,0.5), #fff) no-repeat; color: rgb(96,115,159); text-align: center; }
+    .hero { text-align: center; padding: 4rem 1rem; }
+    .cta { display: inline-block; margin-top: 1rem; padding: 0.75rem 1.5rem; background: #ff006e; color: white; border-radius: 4px; text-decoration: none; }
+    .cta:hover { background: #c20052; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <h2><a href="/">Clicktastic</a></h2>
+      <div class="internal-links">
+        <a href="/" class="active">Home</a>
+        <a href="/services">Services</a>
+        <a href="/blog">Blog</a>
+        <a href="/about">About</a>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <h1>Welcome to Clicktastic</h1>
+      <p>We craft ethical advertising campaigns that connect brands with conscious audiences.</p>
+      <p><a class="cta" href="/services">Explore our services</a></p>
+    </section>
+  </main>
+  <footer>&copy; 2025 Clicktastic. All rights reserved.</footer>
+</body>
+</html>
