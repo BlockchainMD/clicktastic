@@ -1,4 +1,4 @@
-# Astro Starter Kit: Blog
+# Clicktastic
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/astro-blog-starter-template)
 
@@ -6,7 +6,7 @@
 
 <!-- dash-content-start -->
 
-Create a blog with Astro and deploy it on Cloudflare Workers as a [static website](https://developers.cloudflare.com/workers/static-assets/).
+This project contains the source for Clicktastic's website. Built with Astro and deployed to Cloudflare Workers.
 
 Features:
 
