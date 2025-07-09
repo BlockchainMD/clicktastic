@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+---
+
+<Layout
+        title="Contact Us"
+        description="Reach out to the Clicktastic team"
+        pubDate={new Date()}
+        heroImage="/blog-placeholder-4.jpg"
+>
+        <p>
+                We'd love to hear from you! Whether you have a project in mind or
+                just want to learn more about our approach, drop us a line.
+        </p>
+        <p>
+                Email us at <a href="mailto:hello@clicktastic.example">hello@clicktastic.example</a>
+                or call <a href="tel:+15551234567">(555) 123-4567</a>.
+        </p>
+        <p>
+                You can also send us a message using the form below.
+        </p>
+        <form action="#" method="post" class="contact-form">
+                <label>
+                        Name
+                        <input type="text" name="name" required />
+                </label>
+                <label>
+                        Email
+                        <input type="email" name="email" required />
+                </label>
+                <label>
+                        Message
+                        <textarea name="message" rows="5" required></textarea>
+                </label>
+                <button type="submit">Send</button>
+        </form>
+        <style>
+                .contact-form {
+                        display: grid;
+                        gap: 0.75rem;
+                        margin-top: 1rem;
+                }
+                .contact-form label {
+                        display: grid;
+                        gap: 0.25rem;
+                }
+                .contact-form input,
+                .contact-form textarea {
+                        padding: 0.5rem;
+                        font-size: 1rem;
+                        border: 1px solid rgb(var(--gray-light));
+                        border-radius: 4px;
+                        font-family: inherit;
+                }
+                .contact-form button {
+                        width: fit-content;
+                        padding: 0.5rem 1.25rem;
+                        background: var(--accent);
+                        color: white;
+                        border: none;
+                        border-radius: 4px;
+                        cursor: pointer;
+                }
+                .contact-form button:hover {
+                        background: var(--accent-dark);
+                }
+        </style>
+</Layout>
