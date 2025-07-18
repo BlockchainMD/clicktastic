@@ -1,7 +1,7 @@
 ---
 ---
 
-<button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false" type="button">
   <svg id="sun-icon" class="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="12" cy="12" r="5"></circle>
     <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -102,11 +102,27 @@
       
       if (newTheme === 'dark') {
         html.setAttribute('data-theme', 'dark');
+        themeToggle?.setAttribute('aria-pressed', 'true');
+        themeToggle?.setAttribute('aria-label', 'Switch to light mode');
       } else {
         html.removeAttribute('data-theme');
+        themeToggle?.setAttribute('aria-pressed', 'false');
+        themeToggle?.setAttribute('aria-label', 'Switch to dark mode');
       }
       
       localStorage.setItem('theme', newTheme);
+      
+      // Announce theme change to screen readers
+      const announcement = document.createElement('div');
+      announcement.setAttribute('aria-live', 'polite');
+      announcement.setAttribute('aria-atomic', 'true');
+      announcement.className = 'sr-only';
+      announcement.textContent = `Switched to ${newTheme} mode`;
+      document.body.appendChild(announcement);
+      
+      setTimeout(() => {
+        document.body.removeChild(announcement);
+      }, 1000);
     }
     
     // Add event listener

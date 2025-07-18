@@ -1,19 +1,21 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
+import SkipLink from './SkipLink.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
-<header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+<SkipLink />
+<header role="banner">
+	<nav role="navigation" aria-label="Main navigation">
+		<h2><a href="/" aria-label={`${SITE_TITLE} - Home`}>{SITE_TITLE}</a></h2>
                 <div class="nav-right">
-                        <div class="internal-links">
-                                <HeaderLink href="/">Home</HeaderLink>
-                                <HeaderLink href="/services">Services</HeaderLink>
-                                <HeaderLink href="/blog">Blog</HeaderLink>
-                                <HeaderLink href="/about">About</HeaderLink>
-                                <HeaderLink href="/contact">Contact</HeaderLink>
+                        <div class="internal-links" role="menubar">
+                                <HeaderLink href="/" role="menuitem">Home</HeaderLink>
+                                <HeaderLink href="/services" role="menuitem">Services</HeaderLink>
+                                <HeaderLink href="/blog" role="menuitem">Blog</HeaderLink>
+                                <HeaderLink href="/about" role="menuitem">About</HeaderLink>
+                                <HeaderLink href="/contact" role="menuitem">Contact</HeaderLink>
                         </div>
                         <ThemeToggle />
                 </div>
