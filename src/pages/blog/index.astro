@@ -1,7 +1,5 @@
 ---
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
@@ -11,101 +9,566 @@ const posts = (await getCollection('blog')).sort(
 );
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
-	</body>
-</html>
+<PageLayout
+  title="Blog"
+  description="Insights on ethical advertising, digital marketing trends, and industry best practices from the Clicktastic team."
+  heroImage="/blog-placeholder-1.jpg"
+>
+  <!-- Enhanced Hero Section -->
+  <section class="hero-enhanced">
+    <div class="hero-content">
+      <h2 class="hero-tagline">Insights & Inspiration</h2>
+      <p class="hero-description">
+        Discover the latest in ethical advertising, digital marketing trends, and industry best practices. 
+        Our team shares insights, case studies, and actionable strategies to help you create more meaningful connections with your audience.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <strong>{posts.length}</strong>
+          <span>Articles</span>
+        </div>
+        <div class="stat-item">
+          <strong>Weekly</strong>
+          <span>Updates</span>
+        </div>
+        <div class="stat-item">
+          <strong>Expert</strong>
+          <span>Insights</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Post Section -->
+  {posts.length > 0 && (
+    <section class="featured-post">
+      <h2>Featured Article</h2>
+      <div class="featured-card">
+        <a href={`/blog/${posts[0].id}/`} class="featured-link">
+          <div class="featured-image">
+            <img src={posts[0].data.heroImage} alt={posts[0].data.title} />
+            <div class="featured-overlay">
+              <span class="featured-badge">Featured</span>
+            </div>
+          </div>
+          <div class="featured-content">
+            <h3 class="featured-title">{posts[0].data.title}</h3>
+            <p class="featured-description">{posts[0].data.description}</p>
+            <div class="featured-meta">
+              <FormattedDate date={posts[0].data.pubDate} />
+              <span class="read-time">5 min read</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  )}
+
+  <!-- Recent Posts Section -->
+  <section class="recent-posts">
+    <h2>Recent Articles</h2>
+    <div class="posts-grid">
+      {posts.slice(1).map((post) => (
+        <article class="post-card">
+          <a href={`/blog/${post.id}/`} class="post-link">
+            <div class="post-image">
+              <img src={post.data.heroImage} alt={post.data.title} />
+            </div>
+            <div class="post-content">
+              <h3 class="post-title">{post.data.title}</h3>
+              <p class="post-description">{post.data.description}</p>
+              <div class="post-meta">
+                <FormattedDate date={post.data.pubDate} />
+                <span class="read-time">3 min read</span>
+              </div>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Newsletter CTA -->
+  <section class="newsletter-cta">
+    <div class="newsletter-content">
+      <h2>Stay Updated</h2>
+      <p>Get the latest insights on ethical advertising and digital marketing trends delivered to your inbox.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Enter your email" class="newsletter-input" />
+        <button class="newsletter-button">Subscribe</button>
+      </div>
+      <p class="newsletter-note">No spam, unsubscribe anytime. We respect your privacy.</p>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  /* Enhanced Hero Section */
+  .hero-enhanced {
+    text-align: center;
+    padding: 3rem 2rem 4rem;
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.08) 0%, rgba(255, 0, 110, 0.03) 50%, rgba(255, 0, 110, 0.08) 100%);
+    border-radius: 16px;
+    margin-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-enhanced::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 0, 110, 0.05) 0%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tagline {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgb(var(--black));
+    margin: 0 0 1.5rem;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-description {
+    font-size: 1.3rem;
+    color: rgb(var(--gray-dark));
+    margin: 0 0 3rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-item strong {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-item span {
+    font-size: 1rem;
+    color: rgb(var(--gray-dark));
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Featured Post Section */
+  .featured-post {
+    margin-bottom: 5rem;
+  }
+
+  .featured-post h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: rgb(var(--black));
+    text-align: center;
+  }
+
+  .featured-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(var(--gray), 12%);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .featured-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(var(--gray), 18%);
+  }
+
+  .featured-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .featured-image {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+  }
+
+  .featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .featured-card:hover .featured-image img {
+    transform: scale(1.05);
+  }
+
+  .featured-overlay {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .featured-badge {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .featured-content {
+    padding: 2.5rem;
+  }
+
+  .featured-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgb(var(--black));
+    margin: 0 0 1rem;
+    line-height: 1.3;
+  }
+
+  .featured-description {
+    font-size: 1.1rem;
+    color: rgb(var(--gray-dark));
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+  }
+
+  .featured-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: rgb(var(--gray));
+  }
+
+  .read-time {
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .read-time::before {
+    content: '•';
+    position: absolute;
+    left: 0.5rem;
+    color: var(--accent);
+  }
+
+  /* Recent Posts Section */
+  .recent-posts {
+    margin-bottom: 5rem;
+  }
+
+  .recent-posts h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: rgb(var(--black));
+    text-align: center;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+
+  .post-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(var(--gray), 8%);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(var(--gray), 12%);
+  }
+
+  .post-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post-image {
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .post-card:hover .post-image img {
+    transform: scale(1.05);
+  }
+
+  .post-content {
+    padding: 1.5rem;
+  }
+
+  .post-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: rgb(var(--black));
+    margin: 0 0 0.75rem;
+    line-height: 1.4;
+  }
+
+  .post-description {
+    font-size: 1rem;
+    color: rgb(var(--gray-dark));
+    margin: 0 0 1rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: rgb(var(--gray));
+  }
+
+  /* Newsletter CTA */
+  .newsletter-cta {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: white;
+    border-radius: 20px;
+    margin-top: 3rem;
+  }
+
+  .newsletter-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .newsletter-cta h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem;
+    font-weight: 700;
+  }
+
+  .newsletter-cta p {
+    font-size: 1.2rem;
+    margin: 0 0 2rem;
+    opacity: 0.9;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .newsletter-input {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    color: rgb(var(--gray-dark));
+  }
+
+  .newsletter-input::placeholder {
+    color: rgb(var(--gray));
+  }
+
+  .newsletter-button {
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .newsletter-button:hover {
+    background: white;
+    color: var(--accent);
+  }
+
+  .newsletter-note {
+    font-size: 0.875rem;
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-tagline {
+      font-size: 2.2rem;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+    }
+
+    .hero-stats {
+      gap: 2rem;
+    }
+
+    .stat-item strong {
+      font-size: 2rem;
+    }
+
+    .featured-image {
+      height: 250px;
+    }
+
+    .featured-content {
+      padding: 2rem;
+    }
+
+    .featured-title {
+      font-size: 1.6rem;
+    }
+
+    .posts-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .newsletter-form {
+      flex-direction: column;
+    }
+
+    .newsletter-input,
+    .newsletter-button {
+      width: 100%;
+    }
+
+    .hero-enhanced {
+      padding: 2rem 1rem 3rem;
+    }
+
+    .featured-post h2,
+    .recent-posts h2,
+    .newsletter-cta h2 {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-tagline {
+      font-size: 1.8rem;
+    }
+
+    .featured-content {
+      padding: 1.5rem;
+    }
+
+    .post-content {
+      padding: 1.25rem;
+    }
+
+    .newsletter-cta {
+      padding: 3rem 1rem;
+    }
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .featured-card,
+    .post-card {
+      background: rgb(var(--gray-dark));
+      border: 1px solid rgba(var(--gray), 0.3);
+    }
+
+    .featured-title,
+    .post-title {
+      color: white;
+    }
+
+    .featured-description,
+    .post-description {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .newsletter-input {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .featured-card,
+    .post-card,
+    .featured-image img,
+    .post-image img,
+    .newsletter-button {
+      transition: none;
+    }
+
+    .hero-enhanced::before {
+      animation: none;
+    }
+  }
+
+  /* Focus styles for accessibility */
+  .featured-link:focus,
+  .post-link:focus,
+  .newsletter-input:focus,
+  .newsletter-button:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
