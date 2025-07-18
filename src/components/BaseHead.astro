@@ -2,16 +2,40 @@
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
+import StructuredData from './StructuredData.astro';
 
 interface Props {
 	title: string;
 	description: string;
 	image?: string;
+	type?: 'website' | 'article' | 'service' | 'contact';
+	author?: string;
+	publishDate?: Date;
+	modifiedDate?: Date;
+	services?: Array<{
+		name: string;
+		description: string;
+	}>;
+	contactInfo?: {
+		email?: string;
+		phone?: string;
+		address?: string;
+	};
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
+const { 
+	title, 
+	description, 
+	image = '/blog-placeholder-1.jpg',
+	type = 'website',
+	author,
+	publishDate,
+	modifiedDate,
+	services,
+	contactInfo
+} = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -45,3 +69,17 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- Structured Data -->
+<StructuredData 
+	type={type}
+	title={title}
+	description={description}
+	url={Astro.url.pathname}
+	image={image}
+	author={author}
+	publishDate={publishDate}
+	modifiedDate={modifiedDate}
+	services={services}
+	contactInfo={contactInfo}
+/>

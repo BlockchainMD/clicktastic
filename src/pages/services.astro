@@ -1,19 +1,665 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+
+const services = [
+  {
+    name: "Creative Strategy",
+    description: "From concept to execution, we craft campaigns tailored to your brand's unique voice and values. Our strategic approach ensures every creative element aligns with your business objectives and resonates with your target audience.",
+    icon: "🎯",
+    features: ["Brand Positioning", "Campaign Conceptualization", "Creative Direction", "Visual Identity"]
+  },
+  {
+    name: "Digital Media Buying",
+    description: "We optimize spend across channels to reach the right audience at the right time with ethical targeting. Our data-driven approach maximizes ROI while maintaining privacy and transparency standards.",
+    icon: "📈",
+    features: ["Programmatic Advertising", "Social Media Ads", "Search Marketing", "Performance Analytics"]
+  },
+  {
+    name: "Brand Storytelling",
+    description: "We help you articulate your mission and values through compelling narratives that resonate with your audience. Our storytelling approach builds emotional connections and drives brand loyalty.",
+    icon: "📖",
+    features: ["Content Strategy", "Narrative Development", "Brand Messaging", "Audience Engagement"]
+  },
+  {
+    name: "Analytics & Optimization",
+    description: "Continuous measurement and refinement to maximize impact while maintaining ethical standards. We provide transparent reporting and actionable insights to improve campaign performance.",
+    icon: "🔍",
+    features: ["Performance Tracking", "A/B Testing", "Conversion Optimization", "ROI Analysis"]
+  }
+];
+
+const additionalServices = [
+  {
+    name: "Ethical Consultation",
+    description: "Guidance on implementing responsible advertising practices that respect user privacy and build trust.",
+    icon: "🤝"
+  },
+  {
+    name: "Brand Auditing",
+    description: "Comprehensive analysis of your current brand presence and recommendations for improvement.",
+    icon: "🔍"
+  },
+  {
+    name: "Training & Workshops",
+    description: "Educational sessions to help your team understand and implement ethical marketing strategies.",
+    icon: "🎓"
+  }
+];
 ---
 
 <PageLayout
   title="Our Services"
-  description="Ethical advertising solutions that connect brands with conscious audiences."
+  description="Comprehensive ethical advertising solutions that connect brands with conscious audiences while driving meaningful results."
   heroImage="/blog-placeholder-1.jpg"
+  type="service"
+  services={services}
 >
-  <section>
-    <p>At Clicktastic we blend design, data and ethics to build campaigns that resonate.</p>
-    <ul>
-      <li><strong>Creative Strategy</strong> – from concept to execution, we craft campaigns tailored to your brand.</li>
-      <li><strong>Digital Media Buying</strong> – we optimize spend across channels to reach the right audience at the right time.</li>
-      <li><strong>Brand Storytelling</strong> – we help you articulate your mission and values through compelling narratives.</li>
-      <li><strong>Analytics &amp; Optimization</strong> – continuous measurement and refinement to maximize impact.</li>
-    </ul>
+  <!-- Enhanced Hero Section -->
+  <section class="hero-enhanced">
+    <div class="hero-content">
+      <h2 class="hero-tagline">Ethical Advertising Solutions</h2>
+      <p class="hero-description">
+        We blend creativity, data, and ethics to build campaigns that not only perform but also contribute to a better digital ecosystem. 
+        Our comprehensive services help brands connect authentically with their audiences while maintaining the highest standards of responsibility.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <strong>100%</strong>
+          <span>Ethical Practices</span>
+        </div>
+        <div class="stat-item">
+          <strong>250+</strong>
+          <span>Successful Campaigns</span>
+        </div>
+        <div class="stat-item">
+          <strong>98%</strong>
+          <span>Client Satisfaction</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Services Section -->
+  <section class="services-main">
+    <h2>Core Services</h2>
+    <div class="services-grid">
+      {services.map((service) => (
+        <div class="service-card">
+          <div class="service-icon" aria-hidden="true">{service.icon}</div>
+          <h3>{service.name}</h3>
+          <p>{service.description}</p>
+          <ul class="service-features">
+            {service.features.map((feature) => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+          <div class="service-cta">
+            <a href="/contact" class="service-link">Get Started</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Additional Services -->
+  <section class="additional-services">
+    <h2>Additional Services</h2>
+    <div class="additional-services-grid">
+      {additionalServices.map((service) => (
+        <div class="additional-service-card">
+          <div class="service-icon" aria-hidden="true">{service.icon}</div>
+          <h3>{service.name}</h3>
+          <p>{service.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="process-section">
+    <h2>Our Process</h2>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-number">1</div>
+        <h3>Discovery</h3>
+        <p>We start by understanding your brand, goals, and target audience through comprehensive research and analysis.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">2</div>
+        <h3>Strategy</h3>
+        <p>Based on our findings, we develop a tailored strategy that aligns with your objectives and ethical standards.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">3</div>
+        <h3>Execution</h3>
+        <p>Our team brings the strategy to life through creative campaigns and precise media buying across channels.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-number">4</div>
+        <h3>Optimization</h3>
+        <p>We continuously monitor, analyze, and optimize campaigns to ensure maximum impact and ROI.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="services-cta">
+    <h2>Ready to Transform Your Marketing?</h2>
+    <p>Let's discuss how our ethical advertising solutions can help your brand connect authentically with your audience.</p>
+    <div class="cta-group">
+      <a href="/contact" class="cta-primary">Start Your Project</a>
+      <a href="/about" class="cta-secondary">Learn About Us</a>
+    </div>
   </section>
 </PageLayout>
+
+<style>
+  /* Enhanced Hero Section */
+  .hero-enhanced {
+    text-align: center;
+    padding: 3rem 2rem 4rem;
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.08) 0%, rgba(255, 0, 110, 0.03) 50%, rgba(255, 0, 110, 0.08) 100%);
+    border-radius: 16px;
+    margin-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-enhanced::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 0, 110, 0.05) 0%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tagline {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgb(var(--black));
+    margin: 0 0 1.5rem;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-description {
+    font-size: 1.3rem;
+    color: rgb(var(--gray-dark));
+    margin: 0 0 3rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-item strong {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-item span {
+    font-size: 1rem;
+    color: rgb(var(--gray-dark));
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Core Services Section */
+  .services-main {
+    margin-bottom: 5rem;
+  }
+
+  .services-main h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: rgb(var(--black));
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .service-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(var(--gray), 10%), 0 1px 3px rgba(var(--gray), 5%);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(var(--gray-light), 0.5);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(var(--gray), 15%), 0 4px 8px rgba(var(--gray), 10%);
+  }
+
+  .service-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .service-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .service-card:hover .service-icon {
+    transform: scale(1.1);
+  }
+
+  .service-card h3 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem;
+    color: rgb(var(--black));
+    font-weight: 700;
+  }
+
+  .service-card p {
+    color: rgb(var(--gray-dark));
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+  }
+
+  .service-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+  }
+
+  .service-features li {
+    padding: 0.5rem 0;
+    color: rgb(var(--gray-dark));
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .service-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+  }
+
+  .service-cta {
+    margin-top: auto;
+  }
+
+  .service-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .service-link:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+  }
+
+  /* Additional Services */
+  .additional-services {
+    margin-bottom: 5rem;
+    background: rgba(var(--gray-light), 0.3);
+    padding: 3rem 2rem;
+    border-radius: 16px;
+  }
+
+  .additional-services h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 2.5rem;
+    color: rgb(var(--black));
+  }
+
+  .additional-services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .additional-service-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(var(--gray), 8%);
+  }
+
+  .additional-service-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .additional-service-card .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .additional-service-card h3 {
+    font-size: 1.3rem;
+    margin: 0 0 1rem;
+    color: rgb(var(--black));
+  }
+
+  .additional-service-card p {
+    color: rgb(var(--gray-dark));
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* Process Section */
+  .process-section {
+    margin-bottom: 5rem;
+  }
+
+  .process-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: rgb(var(--black));
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .process-step {
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .step-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 1.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  .process-step:hover .step-number {
+    transform: scale(1.1);
+  }
+
+  .process-step h3 {
+    font-size: 1.4rem;
+    margin: 0 0 1rem;
+    color: rgb(var(--black));
+  }
+
+  .process-step p {
+    color: rgb(var(--gray-dark));
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* CTA Section */
+  .services-cta {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: white;
+    border-radius: 16px;
+    margin-top: 3rem;
+  }
+
+  .services-cta h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem;
+    font-weight: 700;
+  }
+
+  .services-cta p {
+    font-size: 1.2rem;
+    margin: 0 0 2.5rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-primary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: white;
+    color: var(--accent);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .cta-primary:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+  }
+
+  .cta-secondary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .cta-secondary:hover {
+    background: white;
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-tagline {
+      font-size: 2.2rem;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+    }
+
+    .hero-stats {
+      gap: 2rem;
+    }
+
+    .stat-item strong {
+      font-size: 2rem;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .additional-services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .process-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-group {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .hero-enhanced {
+      padding: 2rem 1rem 3rem;
+    }
+
+    .services-main h2,
+    .process-section h2,
+    .services-cta h2 {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-tagline {
+      font-size: 1.8rem;
+    }
+
+    .service-card {
+      padding: 2rem;
+    }
+
+    .additional-services {
+      padding: 2rem 1rem;
+    }
+
+    .services-cta {
+      padding: 3rem 1rem;
+    }
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .service-card {
+      background: rgb(var(--gray-dark));
+      border-color: rgba(var(--gray), 0.3);
+    }
+
+    .service-card h3 {
+      color: white;
+    }
+
+    .service-card p,
+    .service-features li {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .additional-service-card {
+      background: rgb(var(--gray-dark));
+    }
+
+    .additional-service-card h3 {
+      color: white;
+    }
+
+    .additional-service-card p {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .additional-services {
+      background: rgba(var(--gray-dark), 0.3);
+    }
+
+    .process-step h3 {
+      color: white;
+    }
+
+    .process-step p {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .service-card,
+    .additional-service-card,
+    .process-step,
+    .service-icon,
+    .step-number,
+    .service-link,
+    .cta-primary,
+    .cta-secondary {
+      transition: none;
+    }
+
+    .hero-enhanced::before {
+      animation: none;
+    }
+  }
+
+  /* Focus styles for accessibility */
+  .service-link:focus,
+  .cta-primary:focus,
+  .cta-secondary:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>

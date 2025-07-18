@@ -1,0 +1,239 @@
+---
+import { SITE_TITLE } from '../consts';
+
+interface Props {
+  type: 'website' | 'article' | 'service' | 'contact';
+  title: string;
+  description: string;
+  url: string;
+  image?: string;
+  author?: string;
+  publishDate?: Date;
+  modifiedDate?: Date;
+  services?: Array<{
+    name: string;
+    description: string;
+  }>;
+  contactInfo?: {
+    email?: string;
+    phone?: string;
+    address?: string;
+  };
+}
+
+const { 
+  type, 
+  title, 
+  description, 
+  url, 
+  image = '/blog-placeholder-1.jpg',
+  author = 'Clicktastic Team',
+  publishDate,
+  modifiedDate,
+  services,
+  contactInfo
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() || 'https://example.com';
+const canonicalUrl = new URL(url, siteUrl).toString();
+const imageUrl = new URL(image, siteUrl).toString();
+
+// Base organization schema
+const organizationSchema = {
+  "@type": "Organization",
+  "name": SITE_TITLE,
+  "url": siteUrl,
+  "logo": {
+    "@type": "ImageObject",
+    "url": new URL('/favicon.svg', siteUrl).toString()
+  },
+  "description": "Ethical advertising for the digital age",
+  "sameAs": []
+};
+
+// WebSite schema for homepage and general pages
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": SITE_TITLE,
+  "description": description,
+  "url": siteUrl,
+  "publisher": organizationSchema,
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": `${siteUrl}/blog?q={search_term_string}`
+    },
+    "query-input": "required name=search_term_string"
+  }
+};
+
+// Article schema for blog posts
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "url": canonicalUrl,
+  "image": {
+    "@type": "ImageObject",
+    "url": imageUrl,
+    "width": 1020,
+    "height": 510
+  },
+  "author": {
+    "@type": "Person",
+    "name": author
+  },
+  "publisher": organizationSchema,
+  "datePublished": publishDate ? publishDate.toISOString() : undefined,
+  "dateModified": modifiedDate ? modifiedDate.toISOString() : publishDate ? publishDate.toISOString() : undefined,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": canonicalUrl
+  }
+};
+
+// Service schema for services page
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": title,
+  "description": description,
+  "url": canonicalUrl,
+  "image": {
+    "@type": "ImageObject",
+    "url": imageUrl
+  },
+  "provider": organizationSchema,
+  "serviceType": "Advertising Services",
+  "category": "Digital Marketing",
+  "hasOfferCatalog": services ? {
+    "@type": "OfferCatalog",
+    "name": "Advertising Services",
+    "itemListElement": services.map((service, index) => ({
+      "@type": "Offer",
+      "name": service.name,
+      "description": service.description,
+      "offeredBy": organizationSchema
+    }))
+  } : undefined
+};
+
+// Contact schema for contact page
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": title,
+  "description": description,
+  "url": canonicalUrl,
+  "image": {
+    "@type": "ImageObject",
+    "url": imageUrl
+  },
+  "mainEntity": {
+    "@type": "Organization",
+    "name": SITE_TITLE,
+    "url": siteUrl,
+    "contactPoint": [
+      contactInfo?.email ? {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": contactInfo.email,
+        "availableLanguage": "English"
+      } : undefined,
+      contactInfo?.phone ? {
+        "@type": "ContactPoint",
+        "contactType": "customer service", 
+        "telephone": contactInfo.phone,
+        "availableLanguage": "English"
+      } : undefined
+    ].filter(Boolean)
+  }
+};
+
+// Breadcrumb schema for better navigation understanding
+const breadcrumbSchema = type === 'article' ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": siteUrl
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": new URL('/blog', siteUrl).toString()
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": title,
+      "item": canonicalUrl
+    }
+  ]
+} : {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": siteUrl
+    }
+  ]
+};
+
+// Clean up undefined values
+function cleanSchema(obj: any): any {
+  if (obj === null || obj === undefined) return undefined;
+  if (typeof obj !== 'object') return obj;
+  
+  const cleaned: any = Array.isArray(obj) ? [] : {};
+  
+  for (const [key, value] of Object.entries(obj)) {
+    const cleanedValue = cleanSchema(value);
+    if (cleanedValue !== undefined) {
+      cleaned[key] = cleanedValue;
+    }
+  }
+  
+  return Object.keys(cleaned).length === 0 ? undefined : cleaned;
+}
+
+const mainSchema = type === 'article' ? cleanSchema(articleSchema) : 
+                  type === 'service' ? cleanSchema(serviceSchema) : 
+                  type === 'contact' ? cleanSchema(contactSchema) :
+                  cleanSchema(websiteSchema);
+const cleanedBreadcrumbSchema = cleanSchema(breadcrumbSchema);
+---
+
+<!-- Main Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(mainSchema)} />
+
+<!-- Breadcrumb Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(cleanedBreadcrumbSchema)} />
+
+<!-- Organization Schema (for better entity recognition) -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": SITE_TITLE,
+  "url": siteUrl,
+  "logo": {
+    "@type": "ImageObject",
+    "url": new URL('/favicon.svg', siteUrl).toString()
+  },
+  "description": "Ethical advertising for the digital age",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "url": new URL('/contact', siteUrl).toString()
+  }
+})} />
