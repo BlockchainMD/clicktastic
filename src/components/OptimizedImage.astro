@@ -1,0 +1,161 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  loading?: 'lazy' | 'eager';
+  sizes?: string;
+  class?: string;
+  priority?: boolean;
+}
+
+const { 
+  src, 
+  alt, 
+  width, 
+  height, 
+  loading = 'lazy', 
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw',
+  class: className = '',
+  priority = false
+} = Astro.props;
+
+// Generate responsive image sizes
+const generateSrcSet = (baseSrc: string, width: number) => {
+  const sizes = [480, 768, 1024, 1200, 1920];
+  return sizes
+    .filter(size => size <= width * 2) // Only include sizes up to 2x the original
+    .map(size => `${baseSrc}?w=${size} ${size}w`)
+    .join(', ');
+};
+
+const srcSet = generateSrcSet(src, width);
+const actualLoading = priority ? 'eager' : loading;
+---
+
+<picture class={`optimized-image ${className}`}>
+  <img 
+    src={src}
+    srcset={srcSet}
+    sizes={sizes}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={actualLoading}
+    decoding="async"
+    class="responsive-image"
+  />
+</picture>
+
+<style>
+  .optimized-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .responsive-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .responsive-image:hover {
+    transform: scale(1.02);
+    box-shadow: var(--box-shadow);
+  }
+
+  /* Lazy loading placeholder */
+  .responsive-image[loading="lazy"] {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Dark mode support */
+  :root[data-theme="dark"] .responsive-image[loading="lazy"] {
+    background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+    background-size: 200% 100%;
+  }
+
+  /* Accessibility improvements */
+  .responsive-image:focus {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .responsive-image {
+      transition: none;
+    }
+    
+    .responsive-image:hover {
+      transform: none;
+    }
+    
+    .responsive-image[loading="lazy"] {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  // Progressive enhancement for better loading experience
+  class OptimizedImage extends HTMLElement {
+    constructor() {
+      super();
+      this.enhanceImage();
+    }
+
+    enhanceImage() {
+      const img = this.querySelector('img');
+      if (!img) return;
+
+      // Add intersection observer for lazy loading
+      if ('IntersectionObserver' in window && img.loading === 'lazy') {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              this.loadImage(img);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          rootMargin: '50px'
+        });
+
+        observer.observe(img);
+      }
+
+      // Handle load events
+      img.addEventListener('load', () => {
+        img.classList.add('loaded');
+      });
+
+      img.addEventListener('error', () => {
+        img.classList.add('error');
+        // Fallback to a placeholder or retry logic
+      });
+    }
+
+    loadImage(img: HTMLImageElement) {
+      // Ensure image is loaded
+      if (img.complete) {
+        img.classList.add('loaded');
+      }
+    }
+  }
+
+  // Register custom element if supported
+  if ('customElements' in window) {
+    customElements.define('optimized-image', OptimizedImage);
+  }
+</script>

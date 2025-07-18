@@ -1,0 +1,229 @@
+---
+// Performance monitoring component for Core Web Vitals
+---
+
+<script>
+  // Core Web Vitals monitoring
+  class PerformanceMonitor {
+    constructor() {
+      this.metrics = {};
+      this.initializeMonitoring();
+    }
+
+    initializeMonitoring() {
+      // Monitor Largest Contentful Paint (LCP)
+      this.observeLCP();
+      
+      // Monitor First Input Delay (FID)
+      this.observeFID();
+      
+      // Monitor Cumulative Layout Shift (CLS)
+      this.observeCLS();
+      
+      // Monitor page load performance
+      this.observePageLoad();
+    }
+
+    observeLCP() {
+      if ('PerformanceObserver' in window) {
+        const observer = new PerformanceObserver((list) => {
+          const entries = list.getEntries();
+          const lastEntry = entries[entries.length - 1];
+          this.metrics.lcp = lastEntry.startTime;
+          this.reportMetric('LCP', lastEntry.startTime);
+        });
+        observer.observe({ entryTypes: ['largest-contentful-paint'] });
+      }
+    }
+
+    observeFID() {
+      if ('PerformanceObserver' in window) {
+        const observer = new PerformanceObserver((list) => {
+          const entries = list.getEntries();
+          entries.forEach(entry => {
+            this.metrics.fid = entry.processingStart - entry.startTime;
+            this.reportMetric('FID', entry.processingStart - entry.startTime);
+          });
+        });
+        observer.observe({ entryTypes: ['first-input'] });
+      }
+    }
+
+    observeCLS() {
+      if ('PerformanceObserver' in window) {
+        let clsValue = 0;
+        const observer = new PerformanceObserver((list) => {
+          const entries = list.getEntries();
+          entries.forEach(entry => {
+            if (!entry.hadRecentInput) {
+              clsValue += entry.value;
+            }
+          });
+          this.metrics.cls = clsValue;
+          this.reportMetric('CLS', clsValue);
+        });
+        observer.observe({ entryTypes: ['layout-shift'] });
+      }
+    }
+
+    observePageLoad() {
+      window.addEventListener('load', () => {
+        const navigation = performance.getEntriesByType('navigation')[0];
+        if (navigation) {
+          this.metrics.loadTime = navigation.loadEventEnd - navigation.fetchStart;
+          this.reportMetric('Load Time', this.metrics.loadTime);
+        }
+      });
+    }
+
+    reportMetric(name, value) {
+      // Log to console in development
+      if (import.meta.env.DEV) {
+        console.log(`${name}: ${value.toFixed(2)}ms`);
+      }
+
+      // Send to analytics service (placeholder)
+      this.sendToAnalytics(name, value);
+    }
+
+    sendToAnalytics(name, value) {
+      // Placeholder for analytics integration
+      // This would integrate with Google Analytics, Plausible, etc.
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'web_vitals', {
+          event_category: 'Performance',
+          event_label: name,
+          value: Math.round(value)
+        });
+      }
+    }
+
+    // Public method to get all metrics
+    getMetrics() {
+      return this.metrics;
+    }
+  }
+
+  // Initialize performance monitoring
+  const performanceMonitor = new PerformanceMonitor();
+  
+  // Make it available globally for debugging
+  window.performanceMonitor = performanceMonitor;
+
+  // Resource loading optimization
+  class ResourceOptimizer {
+    constructor() {
+      this.optimizeImages();
+      this.optimizeFonts();
+      this.preloadCriticalResources();
+    }
+
+    optimizeImages() {
+      // Add intersection observer for lazy loading images
+      const images = document.querySelectorAll('img[loading="lazy"]');
+      
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.classList.add('loading');
+              
+              img.addEventListener('load', () => {
+                img.classList.remove('loading');
+                img.classList.add('loaded');
+              });
+              
+              imageObserver.unobserve(img);
+            }
+          });
+        }, {
+          rootMargin: '50px'
+        });
+
+        images.forEach(img => imageObserver.observe(img));
+      }
+    }
+
+    optimizeFonts() {
+      // Optimize font loading
+      if ('fonts' in document) {
+        document.fonts.ready.then(() => {
+          document.body.classList.add('fonts-loaded');
+        });
+      }
+    }
+
+    preloadCriticalResources() {
+      // Preload critical resources
+      const criticalResources = [
+        '/fonts/atkinson-regular.woff',
+        '/fonts/atkinson-bold.woff'
+      ];
+
+      criticalResources.forEach(resource => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.href = resource;
+        link.as = resource.includes('.woff') ? 'font' : 'style';
+        if (resource.includes('.woff')) {
+          link.type = 'font/woff';
+          link.crossOrigin = 'anonymous';
+        }
+        document.head.appendChild(link);
+      });
+    }
+  }
+
+  // Initialize resource optimization
+  const resourceOptimizer = new ResourceOptimizer();
+
+  // Connection optimization
+  class ConnectionOptimizer {
+    constructor() {
+      this.optimizeConnections();
+    }
+
+    optimizeConnections() {
+      // Add DNS prefetch for external resources
+      const externalDomains = [
+        'fonts.googleapis.com',
+        'fonts.gstatic.com'
+      ];
+
+      externalDomains.forEach(domain => {
+        const link = document.createElement('link');
+        link.rel = 'dns-prefetch';
+        link.href = `//${domain}`;
+        document.head.appendChild(link);
+      });
+    }
+  }
+
+  // Initialize connection optimization
+  const connectionOptimizer = new ConnectionOptimizer();
+</script>
+
+<style>
+  /* Performance-related styles */
+  .loading {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .loaded {
+    opacity: 1;
+  }
+
+  /* Font loading optimization */
+  .fonts-loaded {
+    font-family: "Atkinson", sans-serif;
+  }
+
+  /* Critical CSS for above-the-fold content */
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 50vh;
+    }
+  }
+</style>
