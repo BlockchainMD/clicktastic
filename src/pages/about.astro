@@ -1,24 +1,15 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import PageLayout from '../layouts/PageLayout.astro';
 ---
 
-<Layout
-        title="About Clicktastic"
-        description="Our philosophy and story"
-        pubDate={new Date('2024-01-01')}
-        heroImage="/blog-placeholder-about.jpg"
+<PageLayout
+  title="About Clicktastic"
+  description="Our philosophy and story"
+  heroImage="/blog-placeholder-about.jpg"
 >
-        <p>
-                Clicktastic is a forward-thinking advertising agency built around the belief that marketing can be
-                both effective and ethical. We partner with brands that want to make a positive impact and connect
-                with audiences on a deeper level.
-        </p>
-        <p>
-                Our team combines strategic insight with inspired creativity. From initial concept to final campaign,
-                we focus on transparency, sustainability and results.
-        </p>
-        <p>
-                Based in the digital space, we strive to craft work that people actually enjoy seeing. Join us as we
-                reshape the possibilities of modern advertising.
-        </p>
-</Layout>
+  <section>
+    <p>At Clicktastic, we believe marketing can be both effective and ethical. We partner with brands committed to making a positive impact and forging meaningful connections with their audiences.</p>
+    <p>Our team combines strategic insight with inspired creativity. From initial concept to final campaign, we focus on transparency, sustainability, and results.</p>
+    <p>Based in the digital space, we strive to craft work that people actually enjoy seeing. Join us as we reshape the possibilities of modern advertising.</p>
+  </section>
+</PageLayout>
