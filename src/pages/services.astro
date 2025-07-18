@@ -1,20 +1,19 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import PageLayout from '../layouts/PageLayout.astro';
 ---
 
-<Layout
-        title="Our Services"
-        description="Digital advertising solutions"
-        pubDate={new Date()}
-        heroImage="/blog-placeholder-1.jpg"
+<PageLayout
+  title="Our Services"
+  description="Ethical advertising solutions that connect brands with conscious audiences."
+  heroImage="/blog-placeholder-1.jpg"
 >
-        <p>
-                At Clicktastic we blend design, data and ethics to build campaigns that resonate.
-        </p>
-        <ul>
-                <li>Creative strategy</li>
-                <li>Digital media buying</li>
-                <li>Brand storytelling</li>
-                <li>Analytics & optimization</li>
-        </ul>
-</Layout>
+  <section>
+    <p>At Clicktastic we blend design, data and ethics to build campaigns that resonate.</p>
+    <ul>
+      <li><strong>Creative Strategy</strong> – from concept to execution, we craft campaigns tailored to your brand.</li>
+      <li><strong>Digital Media Buying</strong> – we optimize spend across channels to reach the right audience at the right time.</li>
+      <li><strong>Brand Storytelling</strong> – we help you articulate your mission and values through compelling narratives.</li>
+      <li><strong>Analytics &amp; Optimization</strong> – continuous measurement and refinement to maximize impact.</li>
+    </ul>
+  </section>
+</PageLayout>
