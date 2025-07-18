@@ -3,13 +3,28 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} Clicktastic. All rights reserved.
+        <div class="links">
+                <a href="/privacy">Privacy Policy</a> |
+                <a href="/terms">Terms of Service</a>
+        </div>
+        &copy; {today.getFullYear()} Clicktastic. All rights reserved.
 </footer>
 <style>
-	footer {
-		padding: 2em 1em 6em 1em;
+        footer {
+                padding: 2em 1em 6em 1em;
 		background: linear-gradient(var(--gray-gradient)) no-repeat;
 		color: rgb(var(--gray));
-		text-align: center;
-	}
+                text-align: center;
+        }
+        .links {
+                margin-bottom: 0.5em;
+        }
+        .links a {
+                color: rgb(var(--gray));
+                text-decoration: none;
+                margin: 0 0.25em;
+        }
+        .links a:hover {
+                text-decoration: underline;
+        }
 </style>
