@@ -99,14 +99,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
   .hero-tagline {
     font-size: 2.5rem;
     font-weight: 700;
-    color: rgb(var(--gray-dark));
+    color: var(--text-color);
     margin: 0 0 1rem;
     line-height: 1.2;
   }
 
   .hero-description {
     font-size: 1.25rem;
-    color: rgb(var(--gray));
+    color: var(--text-color-light);
     margin: 0 0 2rem;
     line-height: 1.6;
   }
@@ -166,7 +166,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
     text-align: center;
     font-size: 2.2rem;
     margin-bottom: 3rem;
-    color: rgb(var(--gray-dark));
+    color: var(--text-color);
   }
 
   .services-grid {
@@ -177,12 +177,12 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
   }
 
   .service-card {
-    background: white;
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: var(--box-shadow);
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background-color 0.3s ease;
   }
 
   .service-card:hover {
@@ -198,28 +198,29 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
   .service-card h3 {
     font-size: 1.4rem;
     margin: 0 0 1rem;
-    color: rgb(var(--gray-dark));
+    color: var(--text-color);
   }
 
   .service-card p {
-    color: rgb(var(--gray));
+    color: var(--text-color-light);
     margin: 0;
     line-height: 1.6;
   }
 
   /* Trust Section */
   .trust-section {
-    background: rgba(var(--gray-light), 0.3);
+    background: var(--code-bg);
     padding: 3rem 2rem;
     border-radius: 12px;
     margin-bottom: 4rem;
+    transition: background-color 0.3s ease;
   }
 
   .trust-section h2 {
     text-align: center;
     font-size: 2.2rem;
     margin-bottom: 2rem;
-    color: rgb(var(--gray-dark));
+    color: var(--text-color);
   }
 
   .trust-grid {
@@ -240,7 +241,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
   }
 
   .trust-item p {
-    color: rgb(var(--gray));
+    color: var(--text-color-light);
     margin: 0;
   }
 
