@@ -3,6 +3,7 @@ title: "Advertising Trends 2025"
 description: "Overview of the latest advertising strategies"
 pubDate: "May 30 2025"
 heroImage: "/blog-placeholder-3.jpg"
+tags: ["advertising", "trends", "AI", "digital marketing", "privacy"]
 ---
 
 Digital advertising keeps evolving and 2025 is proving to be a year of rapid change. With third-party cookies fading out, brands are leaning into contextual placements and smarter first-party data. AI-driven ad platforms help optimize campaigns in real time while respecting user privacy.

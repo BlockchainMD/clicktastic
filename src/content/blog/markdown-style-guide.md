@@ -3,6 +3,7 @@ title: "Ad Copy Style Guide"
 description: "Writing effective ads in 2025"
 pubDate: "May 05 2025"
 heroImage: "/blog-placeholder-1.jpg"
+tags: ["copywriting", "style guide", "advertising", "content", "best practices"]
 ---
 
 Great advertising starts with clear language. Keep sentences short, focus on benefits, and lead with a strong call to action. Whether you are crafting search ads or social posts, consistency in tone helps your brand stand out.

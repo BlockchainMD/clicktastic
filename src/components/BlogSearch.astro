@@ -1,0 +1,231 @@
+---
+import Tag from './Tag.astro';
+
+interface Props {
+  allTags: string[];
+}
+
+const { allTags } = Astro.props;
+---
+
+<div class="blog-search">
+  <div class="search-container">
+    <div class="search-input-wrapper">
+      <input 
+        type="text" 
+        id="search-input" 
+        placeholder="Search blog posts..." 
+        class="search-input"
+      />
+      <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+    </div>
+    <button id="clear-search" class="clear-button">Clear</button>
+  </div>
+  
+  <div class="tags-container">
+    <h3>Filter by tags:</h3>
+    <div class="tags-wrapper">
+      {allTags.map(tag => (
+        <Tag tag={tag} onClick={`toggleTag('${tag}')`} />
+      ))}
+    </div>
+  </div>
+  
+  <div class="results-info">
+    <span id="results-count">Showing all posts</span>
+  </div>
+</div>
+
+<style>
+  .blog-search {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 2rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .search-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: border-color 0.3s ease;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color-light);
+  }
+
+  .clear-button {
+    padding: 0.75rem 1.5rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .clear-button:hover {
+    background: var(--accent-dark);
+  }
+
+  .tags-container h3 {
+    margin: 0 0 1rem 0;
+    color: var(--text-color);
+    font-size: 1.1rem;
+  }
+
+  .tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .results-info {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-color-light);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .search-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    .search-input-wrapper {
+      min-width: auto;
+    }
+    
+    .clear-button {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Blog search and filter functionality
+  let activeTags = new Set();
+  let searchQuery = '';
+  let allPosts = [];
+
+  // Initialize search functionality
+  function initBlogSearch() {
+    const searchInput = document.getElementById('search-input');
+    const clearButton = document.getElementById('clear-search');
+    const resultsCount = document.getElementById('results-count');
+    
+    // Get all blog posts
+    allPosts = Array.from(document.querySelectorAll('.blog-post'));
+    
+    // Search input handler
+    searchInput?.addEventListener('input', (e) => {
+      searchQuery = e.target.value.toLowerCase();
+      filterPosts();
+    });
+    
+    // Clear button handler
+    clearButton?.addEventListener('click', () => {
+      searchInput.value = '';
+      searchQuery = '';
+      activeTags.clear();
+      
+      // Clear active tags
+      document.querySelectorAll('.tag').forEach(tag => {
+        tag.classList.remove('active');
+      });
+      
+      filterPosts();
+    });
+    
+    filterPosts();
+  }
+
+  // Toggle tag filter
+  function toggleTag(tag) {
+    if (activeTags.has(tag)) {
+      activeTags.delete(tag);
+    } else {
+      activeTags.add(tag);
+    }
+    
+    // Update tag appearance
+    const tagElement = document.querySelector(`[data-tag="${tag}"]`);
+    if (tagElement) {
+      tagElement.classList.toggle('active', activeTags.has(tag));
+    }
+    
+    filterPosts();
+  }
+
+  // Filter posts based on search and tags
+  function filterPosts() {
+    const resultsCount = document.getElementById('results-count');
+    let visibleCount = 0;
+    
+    allPosts.forEach(post => {
+      const title = post.querySelector('.title')?.textContent.toLowerCase() || '';
+      const postTags = JSON.parse(post.dataset.tags || '[]');
+      
+      const matchesSearch = !searchQuery || title.includes(searchQuery);
+      const matchesTags = activeTags.size === 0 || 
+        Array.from(activeTags).every(tag => postTags.includes(tag));
+      
+      const isVisible = matchesSearch && matchesTags;
+      post.style.display = isVisible ? 'block' : 'none';
+      
+      if (isVisible) visibleCount++;
+    });
+    
+    // Update results count
+    if (resultsCount) {
+      const totalPosts = allPosts.length;
+      if (visibleCount === totalPosts) {
+        resultsCount.textContent = `Showing all ${totalPosts} posts`;
+      } else {
+        resultsCount.textContent = `Showing ${visibleCount} of ${totalPosts} posts`;
+      }
+    }
+  }
+
+  // Make toggleTag available globally
+  window.toggleTag = toggleTag;
+  
+  // Initialize when DOM is ready
+  document.addEventListener('DOMContentLoaded', initBlogSearch);
+</script>

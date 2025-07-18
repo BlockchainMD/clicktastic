@@ -3,6 +3,7 @@ title: "Creative Ad Formats Worth Trying"
 description: "From interactive video to mixed reality"
 pubDate: "Mar 20 2025"
 heroImage: "/blog-placeholder-2.jpg"
+tags: ["creative", "video", "mixed reality", "innovation", "formats"]
 ---
 
 The modern ad mix goes far beyond static banners. Interactive videos let viewers choose their own path through a story, boosting engagement in measurable ways. Shoppable posts on social platforms shorten the distance between product discovery and purchase.
