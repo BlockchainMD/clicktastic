@@ -4,12 +4,618 @@ import PageLayout from '../layouts/PageLayout.astro';
 
 <PageLayout
   title="About Clicktastic"
-  description="Our philosophy and story"
+  description="Learn about our mission to create ethical advertising that builds trust, drives results, and makes a positive impact on the digital ecosystem."
   heroImage="/blog-placeholder-about.jpg"
 >
-  <section>
-    <p>At Clicktastic, we believe marketing can be both effective and ethical. We partner with brands committed to making a positive impact and forging meaningful connections with their audiences.</p>
-    <p>Our team combines strategic insight with inspired creativity. From initial concept to final campaign, we focus on transparency, sustainability, and results.</p>
-    <p>Based in the digital space, we strive to craft work that people actually enjoy seeing. Join us as we reshape the possibilities of modern advertising.</p>
+  <!-- Enhanced Hero Section -->
+  <section class="hero-enhanced">
+    <div class="hero-content">
+      <h2 class="hero-tagline">Ethical Advertising, Meaningful Results</h2>
+      <p class="hero-description">
+        At Clicktastic, we believe marketing can be both effective and ethical. We partner with brands committed to 
+        making a positive impact and forging meaningful connections with their audiences through responsible advertising practices.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <strong>2019</strong>
+          <span>Founded</span>
+        </div>
+        <div class="stat-item">
+          <strong>100+</strong>
+          <span>Clients Served</span>
+        </div>
+        <div class="stat-item">
+          <strong>100%</strong>
+          <span>Ethical Standards</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission-section">
+    <div class="mission-content">
+      <h2>Our Mission</h2>
+      <p class="mission-statement">
+        We're reshaping the advertising landscape by proving that ethical practices and outstanding results aren't mutually exclusive. 
+        Our mission is to create campaigns that respect user privacy, build genuine trust, and deliver measurable impact for brands 
+        that care about their customers and communities.
+      </p>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values-section">
+    <h2>Our Values</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">🛡️</div>
+        <h3>Privacy First</h3>
+        <p>We prioritize user privacy and data protection in every campaign, using ethical targeting methods that respect individual choice.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🤝</div>
+        <h3>Trust & Transparency</h3>
+        <p>We build relationships based on honesty, providing clear reporting and maintaining open communication with all stakeholders.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🎯</div>
+        <h3>Results-Driven</h3>
+        <p>We deliver measurable outcomes that align with your business goals while maintaining the highest ethical standards.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🌱</div>
+        <h3>Sustainable Impact</h3>
+        <p>We focus on long-term success and positive impact, creating campaigns that benefit brands, customers, and society.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story Section -->
+  <section class="story-section">
+    <div class="story-content">
+      <h2>Our Story</h2>
+      <div class="story-text">
+        <p>
+          Founded in 2019, Clicktastic emerged from a simple observation: the advertising industry needed a fundamental shift toward 
+          ethical practices. We saw too many campaigns that prioritized short-term gains over long-term trust, and we knew there had to be a better way.
+        </p>
+        <p>
+          Our founders, with combined decades of experience in digital marketing, set out to prove that ethical advertising isn't just 
+          possible—it's more effective. By respecting user privacy, creating genuine value, and building authentic connections, we've helped 
+          our clients achieve remarkable results while maintaining their integrity.
+        </p>
+        <p>
+          Today, we're proud to work with forward-thinking brands who share our vision of a more ethical digital ecosystem. Every campaign 
+          we create is a step toward a future where advertising serves both business goals and the greater good.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <h2>Meet Our Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="member-image">
+          <img src="/blog-placeholder-2.jpg" alt="Team Member" />
+        </div>
+        <div class="member-info">
+          <h3>Sarah Chen</h3>
+          <p class="member-role">Founder & CEO</p>
+          <p class="member-bio">Strategic visionary with 15+ years in digital marketing and a passion for ethical business practices.</p>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="member-image">
+          <img src="/blog-placeholder-3.jpg" alt="Team Member" />
+        </div>
+        <div class="member-info">
+          <h3>Marcus Rodriguez</h3>
+          <p class="member-role">Creative Director</p>
+          <p class="member-bio">Award-winning creative leader specializing in authentic brand storytelling and compelling visual narratives.</p>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="member-image">
+          <img src="/blog-placeholder-4.jpg" alt="Team Member" />
+        </div>
+        <div class="member-info">
+          <h3>Dr. Emily Watson</h3>
+          <p class="member-role">Data & Analytics Lead</p>
+          <p class="member-bio">PhD in Data Science with expertise in ethical AI and privacy-preserving analytics methodologies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="about-cta">
+    <div class="cta-content">
+      <h2>Ready to Work Together?</h2>
+      <p>Let's create something meaningful. Partner with us to build campaigns that drive results while respecting your audience.</p>
+      <div class="cta-group">
+        <a href="/contact" class="cta-primary">Start a Conversation</a>
+        <a href="/services" class="cta-secondary">Explore Our Services</a>
+      </div>
+    </div>
   </section>
 </PageLayout>
+
+<style>
+  /* Enhanced Hero Section */
+  .hero-enhanced {
+    text-align: center;
+    padding: 3rem 2rem 4rem;
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.08) 0%, rgba(255, 0, 110, 0.03) 50%, rgba(255, 0, 110, 0.08) 100%);
+    border-radius: 16px;
+    margin-bottom: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-enhanced::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 0, 110, 0.05) 0%, transparent 70%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+
+  .hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tagline {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgb(var(--black));
+    margin: 0 0 1.5rem;
+    line-height: 1.1;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-description {
+    font-size: 1.3rem;
+    color: rgb(var(--gray-dark));
+    margin: 0 0 3rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-item strong {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-item span {
+    font-size: 1rem;
+    color: rgb(var(--gray-dark));
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Mission Section */
+  .mission-section {
+    margin-bottom: 5rem;
+    text-align: center;
+  }
+
+  .mission-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    background: rgba(var(--gray-light), 0.3);
+    border-radius: 16px;
+  }
+
+  .mission-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: rgb(var(--black));
+  }
+
+  .mission-statement {
+    font-size: 1.2rem;
+    color: rgb(var(--gray-dark));
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* Values Section */
+  .values-section {
+    margin-bottom: 5rem;
+  }
+
+  .values-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: rgb(var(--black));
+    text-align: center;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .value-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(var(--gray), 8%);
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .value-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 32px rgba(var(--gray), 12%);
+  }
+
+  .value-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .value-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .value-card:hover .value-icon {
+    transform: scale(1.1);
+  }
+
+  .value-card h3 {
+    font-size: 1.4rem;
+    margin: 0 0 1rem;
+    color: rgb(var(--black));
+    font-weight: 700;
+  }
+
+  .value-card p {
+    color: rgb(var(--gray-dark));
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Story Section */
+  .story-section {
+    margin-bottom: 5rem;
+  }
+
+  .story-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .story-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: rgb(var(--black));
+    text-align: center;
+  }
+
+  .story-text p {
+    font-size: 1.1rem;
+    color: rgb(var(--gray-dark));
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .story-text p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Team Section */
+  .team-section {
+    margin-bottom: 5rem;
+  }
+
+  .team-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: rgb(var(--black));
+    text-align: center;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .team-member {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(var(--gray), 8%);
+    transition: all 0.3s ease;
+  }
+
+  .team-member:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(var(--gray), 12%);
+  }
+
+  .member-image {
+    height: 250px;
+    overflow: hidden;
+  }
+
+  .member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .team-member:hover .member-image img {
+    transform: scale(1.05);
+  }
+
+  .member-info {
+    padding: 2rem;
+  }
+
+  .member-info h3 {
+    font-size: 1.3rem;
+    margin: 0 0 0.5rem;
+    color: rgb(var(--black));
+    font-weight: 700;
+  }
+
+  .member-role {
+    font-size: 1rem;
+    color: var(--accent);
+    margin: 0 0 1rem;
+    font-weight: 600;
+  }
+
+  .member-bio {
+    color: rgb(var(--gray-dark));
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* CTA Section */
+  .about-cta {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: white;
+    border-radius: 16px;
+    margin-top: 3rem;
+  }
+
+  .cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .about-cta h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem;
+    font-weight: 700;
+  }
+
+  .about-cta p {
+    font-size: 1.2rem;
+    margin: 0 0 2.5rem;
+    opacity: 0.9;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-primary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: white;
+    color: var(--accent);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .cta-primary:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+  }
+
+  .cta-secondary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: white;
+    text-decoration: none;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .cta-secondary:hover {
+    background: white;
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-tagline {
+      font-size: 2.2rem;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+    }
+
+    .hero-stats {
+      gap: 2rem;
+    }
+
+    .stat-item strong {
+      font-size: 2rem;
+    }
+
+    .mission-content {
+      padding: 2rem 1.5rem;
+    }
+
+    .values-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-group {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .hero-enhanced {
+      padding: 2rem 1rem 3rem;
+    }
+
+    .mission-section h2,
+    .values-section h2,
+    .story-section h2,
+    .team-section h2,
+    .about-cta h2 {
+      font-size: 2rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-tagline {
+      font-size: 1.8rem;
+    }
+
+    .value-card {
+      padding: 2rem;
+    }
+
+    .member-info {
+      padding: 1.5rem;
+    }
+
+    .about-cta {
+      padding: 3rem 1rem;
+    }
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .mission-content {
+      background: rgba(var(--gray-dark), 0.3);
+    }
+
+    .value-card,
+    .team-member {
+      background: rgb(var(--gray-dark));
+      border: 1px solid rgba(var(--gray), 0.3);
+    }
+
+    .value-card h3,
+    .member-info h3 {
+      color: white;
+    }
+
+    .value-card p,
+    .member-bio {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .mission-statement,
+    .story-text p {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .value-card,
+    .team-member,
+    .value-icon,
+    .member-image img,
+    .cta-primary,
+    .cta-secondary {
+      transition: none;
+    }
+
+    .hero-enhanced::before {
+      animation: none;
+    }
+  }
+
+  /* Focus styles for accessibility */
+  .cta-primary:focus,
+  .cta-secondary:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+</style>
