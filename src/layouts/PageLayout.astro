@@ -1,0 +1,58 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  heroImage?: string;
+}
+
+const { title, description, heroImage } = Astro.props;
+---
+
+<BaseHead title={title} description={description} image={heroImage} />
+
+<Header />
+
+<main>
+  <section class="hero">
+    {heroImage && (
+      <img src={heroImage} alt={title} />
+    )}
+    <h1>{title}</h1>
+    <p>{description}</p>
+  </section>
+  <slot />
+</main>
+
+<Footer />
+
+<style>
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  .hero {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .hero img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: var(--box-shadow);
+  }
+  .hero h1 {
+    margin: 0 0 0.5rem;
+    font-size: 2.5rem;
+  }
+  .hero p {
+    margin: 0;
+    color: rgb(var(--gray-dark));
+    font-size: 1.25rem;
+  }
+</style>
