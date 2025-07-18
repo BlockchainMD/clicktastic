@@ -12,6 +12,7 @@ interface Props {
 	author?: string;
 	publishDate?: Date;
 	modifiedDate?: Date;
+	tags?: string[];
 	services?: Array<{
 		name: string;
 		description: string;
@@ -33,6 +34,7 @@ const {
 	author,
 	publishDate,
 	modifiedDate,
+	tags,
 	services,
 	contactInfo
 } = Astro.props;
@@ -80,6 +82,7 @@ const {
 	author={author}
 	publishDate={publishDate}
 	modifiedDate={modifiedDate}
+	tags={tags}
 	services={services}
 	contactInfo={contactInfo}
 />

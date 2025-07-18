@@ -10,6 +10,7 @@ interface Props {
   author?: string;
   publishDate?: Date;
   modifiedDate?: Date;
+  tags?: string[];
   services?: Array<{
     name: string;
     description: string;
@@ -30,6 +31,7 @@ const {
   author = 'Clicktastic Team',
   publishDate,
   modifiedDate,
+  tags,
   services,
   contactInfo
 } = Astro.props;
@@ -89,6 +91,8 @@ const articleSchema = {
   "publisher": organizationSchema,
   "datePublished": publishDate ? publishDate.toISOString() : undefined,
   "dateModified": modifiedDate ? modifiedDate.toISOString() : publishDate ? publishDate.toISOString() : undefined,
+  "keywords": tags?.join(', '),
+  "articleSection": tags?.[0],
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": canonicalUrl
