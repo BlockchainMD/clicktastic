@@ -2,7 +2,7 @@
 import { SITE_TITLE } from '../consts';
 
 interface Props {
-  type: 'website' | 'article' | 'service';
+  type: 'website' | 'article' | 'service' | 'contact';
   title: string;
   description: string;
   url: string;
@@ -14,6 +14,11 @@ interface Props {
     name: string;
     description: string;
   }>;
+  contactInfo?: {
+    email?: string;
+    phone?: string;
+    address?: string;
+  };
 }
 
 const { 
@@ -25,7 +30,8 @@ const {
   author = 'Clicktastic Team',
   publishDate,
   modifiedDate,
-  services
+  services,
+  contactInfo
 } = Astro.props;
 
 const siteUrl = Astro.site?.toString() || 'https://example.com';
@@ -115,6 +121,38 @@ const serviceSchema = {
   } : undefined
 };
 
+// Contact schema for contact page
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": title,
+  "description": description,
+  "url": canonicalUrl,
+  "image": {
+    "@type": "ImageObject",
+    "url": imageUrl
+  },
+  "mainEntity": {
+    "@type": "Organization",
+    "name": SITE_TITLE,
+    "url": siteUrl,
+    "contactPoint": [
+      contactInfo?.email ? {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": contactInfo.email,
+        "availableLanguage": "English"
+      } : undefined,
+      contactInfo?.phone ? {
+        "@type": "ContactPoint",
+        "contactType": "customer service", 
+        "telephone": contactInfo.phone,
+        "availableLanguage": "English"
+      } : undefined
+    ].filter(Boolean)
+  }
+};
+
 // Breadcrumb schema for better navigation understanding
 const breadcrumbSchema = type === 'article' ? {
   "@context": "https://schema.org",
@@ -171,6 +209,7 @@ function cleanSchema(obj: any): any {
 
 const mainSchema = type === 'article' ? cleanSchema(articleSchema) : 
                   type === 'service' ? cleanSchema(serviceSchema) : 
+                  type === 'contact' ? cleanSchema(contactSchema) :
                   cleanSchema(websiteSchema);
 const cleanedBreadcrumbSchema = cleanSchema(breadcrumbSchema);
 ---

@@ -8,7 +8,7 @@ interface Props {
 	title: string;
 	description: string;
 	image?: string;
-	type?: 'website' | 'article' | 'service';
+	type?: 'website' | 'article' | 'service' | 'contact';
 	author?: string;
 	publishDate?: Date;
 	modifiedDate?: Date;
@@ -16,6 +16,11 @@ interface Props {
 		name: string;
 		description: string;
 	}>;
+	contactInfo?: {
+		email?: string;
+		phone?: string;
+		address?: string;
+	};
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -28,7 +33,8 @@ const {
 	author,
 	publishDate,
 	modifiedDate,
-	services
+	services,
+	contactInfo
 } = Astro.props;
 ---
 
@@ -75,4 +81,5 @@ const {
 	publishDate={publishDate}
 	modifiedDate={modifiedDate}
 	services={services}
+	contactInfo={contactInfo}
 />
