@@ -1,11 +1,18 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+
+const contactInfo = {
+  email: "hello@clicktastic.net",
+  phone: "+15551234567"
+};
 ---
 
 <PageLayout
   title="Contact Us"
   description="Reach out to the Clicktastic team"
   heroImage="/blog-placeholder-4.jpg"
+  type="contact"
+  contactInfo={contactInfo}
 >
   <section>
     <p>We'd love to hear from you! Whether you have a project in mind or just want to learn more about our approach, drop us a line.</p>

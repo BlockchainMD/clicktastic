@@ -1,17 +1,21 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
 <header>
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
-                <div class="internal-links">
-                        <HeaderLink href="/">Home</HeaderLink>
-                        <HeaderLink href="/services">Services</HeaderLink>
-                        <HeaderLink href="/blog">Blog</HeaderLink>
-                        <HeaderLink href="/about">About</HeaderLink>
-                        <HeaderLink href="/contact">Contact</HeaderLink>
+                <div class="nav-right">
+                        <div class="internal-links">
+                                <HeaderLink href="/">Home</HeaderLink>
+                                <HeaderLink href="/services">Services</HeaderLink>
+                                <HeaderLink href="/blog">Blog</HeaderLink>
+                                <HeaderLink href="/about">About</HeaderLink>
+                                <HeaderLink href="/contact">Contact</HeaderLink>
+                        </div>
+                        <ThemeToggle />
                 </div>
 	</nav>
 </header>
@@ -19,8 +23,9 @@ import { SITE_TITLE } from '../consts';
 	header {
 		margin: 0;
 		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		background: var(--header-bg);
+		box-shadow: var(--box-shadow);
+		transition: background-color 0.3s ease;
 	}
 	h2 {
 		margin: 0;
@@ -30,20 +35,48 @@ import { SITE_TITLE } from '../consts';
 	h2 a,
 	h2 a.active {
 		text-decoration: none;
+		color: var(--text-color);
 	}
 	nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 	}
+	
+	.nav-right {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+	
+	.internal-links {
+		display: flex;
+		align-items: center;
+	}
+	
 	nav a {
 		padding: 1em 0.5em;
-		color: var(--black);
+		color: var(--text-color);
 		border-bottom: 4px solid transparent;
 		text-decoration: none;
+		transition: color 0.3s ease;
 	}
 	nav a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
+	}
+	
+	@media (max-width: 720px) {
+		.nav-right {
+			gap: 0.5rem;
+		}
+		
+		.internal-links {
+			display: none;
+		}
+		
+		nav {
+			justify-content: space-between;
+		}
 	}
 </style>

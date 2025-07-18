@@ -1,47 +1,324 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import PageLayout from '../layouts/PageLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-                <main>
-                        <section class="hero">
-                                <h1>Welcome to Clicktastic</h1>
-                                <p>
-                                        We craft ethical advertising campaigns that connect brands with
-                                        conscious audiences.
-                                </p>
-                                <p>
-                                        <a class="cta" href="/services">Explore our services</a>
-                                </p>
-                        </section>
-                </main>
-                <style>
-                        .hero {
-                                text-align: center;
-                                padding: 4rem 1rem;
-                        }
-                        .cta {
-                                display: inline-block;
-                                margin-top: 1rem;
-                                padding: 0.75rem 1.5rem;
-                                background: var(--accent);
-                                color: white;
-                                border-radius: 4px;
-                                text-decoration: none;
-                        }
-                        .cta:hover {
-                                background: var(--accent-dark);
-                        }
-                </style>
-		<Footer />
-	</body>
-</html>
+<PageLayout
+  title={SITE_TITLE}
+  description="Transform your brand with ethical advertising campaigns that connect with conscious audiences and drive meaningful results."
+  heroImage="/blog-placeholder-1.jpg"
+>
+  <!-- Enhanced Hero Section -->
+  <section class="hero-enhanced">
+    <div class="hero-content">
+      <h2 class="hero-tagline">Ethical Advertising for the Digital Age</h2>
+      <p class="hero-description">
+        We craft data-driven, ethical advertising campaigns that connect brands with conscious audiences, 
+        building trust while driving meaningful results. Join the movement toward responsible marketing.
+      </p>
+      <div class="hero-cta-group">
+        <a href="/services" class="cta-primary">Explore Our Services</a>
+        <a href="/contact" class="cta-secondary">Get Free Consultation</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Services Section -->
+  <section class="services-preview">
+    <h2>What We Do Best</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🎯</div>
+        <h3>Creative Strategy</h3>
+        <p>From concept to execution, we craft campaigns tailored to your brand's unique voice and values.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📈</div>
+        <h3>Digital Media Buying</h3>
+        <p>Optimize spend across channels to reach the right audience at the right time with ethical targeting.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📖</div>
+        <h3>Brand Storytelling</h3>
+        <p>Articulate your mission and values through compelling narratives that resonate with your audience.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3>Analytics & Optimization</h3>
+        <p>Continuous measurement and refinement to maximize impact while maintaining ethical standards.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Indicators -->
+  <section class="trust-section">
+    <h2>Why Choose Clicktastic?</h2>
+    <div class="trust-grid">
+      <div class="trust-item">
+        <strong>100% Ethical</strong>
+        <p>We never compromise on privacy or manipulative tactics</p>
+      </div>
+      <div class="trust-item">
+        <strong>Data-Driven</strong>
+        <p>Every decision backed by comprehensive analytics and insights</p>
+      </div>
+      <div class="trust-item">
+        <strong>Transparent</strong>
+        <p>Full visibility into campaign performance and spending</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Call to Action -->
+  <section class="final-cta">
+    <h2>Ready to Transform Your Marketing?</h2>
+    <p>Join forward-thinking brands who are making a positive impact through ethical advertising.</p>
+    <div class="cta-group">
+      <a href="/services" class="cta-primary">View Our Services</a>
+      <a href="/contact" class="cta-secondary">Start Your Project</a>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  /* Enhanced Hero Section */
+  .hero-enhanced {
+    text-align: center;
+    padding: 2rem 0 4rem;
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.05) 0%, rgba(255, 0, 110, 0.02) 100%);
+    border-radius: 12px;
+    margin-bottom: 4rem;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .hero-tagline {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0 0 1rem;
+    line-height: 1.2;
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    color: var(--text-color-light);
+    margin: 0 0 2rem;
+    line-height: 1.6;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Call-to-Action Buttons */
+  .cta-primary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--box-shadow);
+  }
+
+  .cta-primary:hover {
+    background: var(--accent-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(var(--gray), 40%);
+  }
+
+  .cta-secondary {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: transparent;
+    color: var(--accent);
+    text-decoration: none;
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+  }
+
+  .cta-secondary:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  /* Services Preview Section */
+  .services-preview {
+    margin-bottom: 4rem;
+  }
+
+  .services-preview h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .service-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .service-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .service-card h3 {
+    font-size: 1.4rem;
+    margin: 0 0 1rem;
+    color: var(--text-color);
+  }
+
+  .service-card p {
+    color: var(--text-color-light);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Trust Section */
+  .trust-section {
+    background: var(--code-bg);
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    margin-bottom: 4rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .trust-section h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+  }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .trust-item {
+    text-align: center;
+  }
+
+  .trust-item strong {
+    display: block;
+    font-size: 1.3rem;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .trust-item p {
+    color: var(--text-color-light);
+    margin: 0;
+  }
+
+  /* Final CTA Section */
+  .final-cta {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    color: white;
+    border-radius: 12px;
+  }
+
+  .final-cta h2 {
+    font-size: 2.2rem;
+    margin: 0 0 1rem;
+  }
+
+  .final-cta p {
+    font-size: 1.2rem;
+    margin: 0 0 2rem;
+    opacity: 0.9;
+  }
+
+  .cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .final-cta .cta-primary {
+    background: white;
+    color: var(--accent);
+  }
+
+  .final-cta .cta-primary:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--accent-dark);
+  }
+
+  .final-cta .cta-secondary {
+    border-color: white;
+    color: white;
+  }
+
+  .final-cta .cta-secondary:hover {
+    background: white;
+    color: var(--accent);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-tagline {
+      font-size: 2rem;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+    }
+
+    .hero-cta-group {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .trust-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

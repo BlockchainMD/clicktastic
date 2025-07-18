@@ -1,11 +1,32 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+
+const services = [
+  {
+    name: "Creative Strategy",
+    description: "From concept to execution, we craft campaigns tailored to your brand's unique voice and values."
+  },
+  {
+    name: "Digital Media Buying",
+    description: "We optimize spend across channels to reach the right audience at the right time with ethical targeting."
+  },
+  {
+    name: "Brand Storytelling",
+    description: "We help you articulate your mission and values through compelling narratives that resonate with your audience."
+  },
+  {
+    name: "Analytics & Optimization",
+    description: "Continuous measurement and refinement to maximize impact while maintaining ethical standards."
+  }
+];
 ---
 
 <PageLayout
   title="Our Services"
   description="Ethical advertising solutions that connect brands with conscious audiences."
   heroImage="/blog-placeholder-1.jpg"
+  type="service"
+  services={services}
 >
   <section>
     <p>At Clicktastic we blend design, data and ethics to build campaigns that resonate.</p>
