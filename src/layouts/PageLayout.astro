@@ -7,12 +7,17 @@ interface Props {
   title: string;
   description: string;
   heroImage?: string;
+  type?: 'website' | 'article' | 'service';
+  services?: Array<{
+    name: string;
+    description: string;
+  }>;
 }
 
-const { title, description, heroImage } = Astro.props;
+const { title, description, heroImage, type = 'website', services } = Astro.props;
 ---
 
-<BaseHead title={title} description={description} image={heroImage} />
+<BaseHead title={title} description={description} image={heroImage} type={type} services={services} />
 
 <Header />
 
