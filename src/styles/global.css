@@ -15,6 +15,22 @@
   --box-shadow:
     0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
     0 16px 32px rgba(var(--gray), 33%);
+  
+  /* Additional variables for modern design */
+  --text-color: rgb(var(--black));
+  --text-color-light: rgb(var(--gray-dark));
+  --card-bg: #ffffff;
+  --code-bg: rgba(var(--gray-light), 0.3);
+  --header-bg: rgba(255, 255, 255, 0.95);
+}
+
+/* Dark mode variables */
+[data-theme="dark"] {
+  --text-color: rgba(255, 255, 255, 0.9);
+  --text-color-light: rgba(255, 255, 255, 0.7);
+  --card-bg: rgb(var(--gray-dark));
+  --code-bg: rgba(var(--gray-dark), 0.5);
+  --header-bg: rgba(var(--gray-dark), 0.95);
 }
 @font-face {
   font-family: "Atkinson";
