@@ -153,3 +153,87 @@ hr {
   /* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
   white-space: nowrap;
 }
+
+/* Accessibility Enhancements */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --accent: #0066cc;
+    --accent-dark: #004499;
+    --text-color: #000000;
+    --bg-color: #ffffff;
+    --border-color: #000000;
+  }
+}
+
+/* Focus management */
+*:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Skip to content functionality */
+.skip-link:focus {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 9999;
+}
+
+/* Improved link accessibility */
+a:focus,
+a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+/* Better button accessibility */
+button:focus,
+input[type="button"]:focus,
+input[type="submit"]:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Improved form accessibility */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Performance optimizations */
+.loading {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.loaded {
+  opacity: 1;
+}
+
+/* Font loading optimization */
+.fonts-loaded {
+  font-family: "Atkinson", sans-serif;
+}
